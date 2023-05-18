@@ -1,0 +1,25 @@
+from datetime import datetime
+from airflow import DAG
+from airflow.operators.s3_file_transform_operator import S3UploadOperator
+
+# Define the DAG
+dag = DAG(
+    'upload_csv_to_s3',
+    description='Upload CSV file to S3',
+    start_date=datetime(2023, 5, 18),
+    schedule_interval=None,
+)
+
+# Define the S3UploadOperator task
+upload_csv_task = S3UploadOperator(
+    task_id='upload_csv',
+    aws_conn_id='aws_default',  # Airflow connection ID for AWS credentials
+    local_file_path='/path/to/your/local/file.csv',  # Path to your local CSV file
+    s3_bucket='your-s3-bucket',  # Name of your S3 bucket
+    s3_key='uploaded_file.csv',  # Key or path of the uploaded file in S3
+    dag=dag,
+)
+
+# Set task dependencies
+upload_csv_task
+
