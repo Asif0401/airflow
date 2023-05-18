@@ -23,3 +23,12 @@ upload_csv_task = S3UploadOperator(
 # Set task dependencies
 upload_csv_task
 
+
+
+
+
+driver = "com.mysql.cj.jdbc.Driver"
+url = "jdbc:mysql://karthick1808.c0yl1qlc1wgt.ap-south-1.rds.amazonaws.com/"
+table = "karthick.demo123"
+user = "karthick1808"
+password = "Welcome!12345"
